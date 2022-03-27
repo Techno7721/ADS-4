@@ -22,20 +22,21 @@ int countPairs2(int* arr, int len, int value) {
         if (arr[i] + arr[j] > value) {
             --j;
         } else if (arr[i] + arr[j] == value) {
-            for (int j1 = j; j1 >= 0; --j1) {
-                if (arr[i] + arr[j1] != value) {
-                    break;
-                }
-                checkj += 1;
-                count += 1;
-            }
-            for (int i1 = i+1; i1 < len; ++i1) {
+            for (int i1 = i; i1 < j; ++i1) {
                 if (arr[i1] + arr[j] != value) {
                     break;
                 }
-                checki = +1;
-                count += 1;
+                for (int j1 = j; j1 > i1; --j1) {
+                    //cout << arr[i1] << " " << arr[j1] << endl;
+                    if (arr[i1] + arr[j1] != value) {
+                        break;
+                    }
+                    checkj += 1;
+                    count += 1;
+                }
+                checki += 1;
             }
+            checkj = checkj / checki;
             i += checki;
             j -= checkj;
             checki = 0;
